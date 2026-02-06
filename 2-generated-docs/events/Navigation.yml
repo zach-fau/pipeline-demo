@@ -1,0 +1,7 @@
+service: "Navigation"
+events:
+  emitted: []
+  consumed:
+    - name: "auth.onAuthStateChanged"
+      handler: "app/App.tsx:AppInner"
+      description: "Listens for auth state changes to seed the logged-in user's email into the zsociety_whitelist so Z Society tabs appear in the demo"

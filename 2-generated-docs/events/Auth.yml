@@ -1,0 +1,7 @@
+service: "Auth"
+events:
+  emitted: []
+  consumed:
+    - name: "onAuthStateChanged"
+      handler: "app/src/store/AuthContext.tsx:AuthProvider"
+      description: "Listens for Firebase authentication state changes. When a user signs in, sets the user profile state. When a user signs out, clears the user state. Also sets isLoading to false once the initial auth state is determined."

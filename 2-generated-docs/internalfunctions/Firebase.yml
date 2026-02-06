@@ -1,0 +1,194 @@
+service: "Firebase"
+functions:
+  - name: "stableUid"
+    file: "app/src/services/firebase/index.ts"
+    line: 7
+    description: "Generates a deterministic UID from an email string using a hash function. Used by the mock auth layer to produce consistent user IDs"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "The email to hash into a UID"
+    returns:
+      type: "string"
+      description: "A stable UID string in the format 'uid-{hash}'"
+    dependencies: []
+    sideEffects: []
+
+  - name: "getNestedField"
+    file: "app/src/services/firebase/index.ts"
+    line: 16
+    description: "Accesses a nested property on an object using dot-notation path (e.g. 'a.b.c')"
+    parameters:
+      - name: "obj"
+        type: "any"
+        description: "The object to traverse"
+      - name: "path"
+        type: "string"
+        description: "Dot-separated path to the field"
+    returns:
+      type: "any"
+      description: "The value at the specified path, or undefined if not found"
+    dependencies: []
+    sideEffects: []
+
+  - name: "auth.signInWithEmailAndPassword"
+    file: "app/src/services/firebase/index.ts"
+    line: 34
+    description: "Mock Firebase auth sign-in. Sets the currentUser and notifies all auth listeners"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "User email"
+      - name: "_password"
+        type: "string"
+        description: "User password (ignored in mock)"
+    returns:
+      type: "Promise<{ user: User }>"
+      description: "Object containing the authenticated user"
+    dependencies:
+      - "stableUid"
+    sideEffects:
+      - "Sets module-level currentUser"
+      - "Triggers all registered auth listeners"
+
+  - name: "auth.createUserWithEmailAndPassword"
+    file: "app/src/services/firebase/index.ts"
+    line: 40
+    description: "Mock Firebase auth user creation. Creates a user and notifies all auth listeners"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "User email"
+      - name: "_password"
+        type: "string"
+        description: "User password (ignored in mock)"
+    returns:
+      type: "Promise<{ user: User }>"
+      description: "Object containing the newly created user"
+    dependencies:
+      - "stableUid"
+    sideEffects:
+      - "Sets module-level currentUser"
+      - "Triggers all registered auth listeners"
+
+  - name: "auth.signOut"
+    file: "app/src/services/firebase/index.ts"
+    line: 46
+    description: "Mock Firebase auth sign-out. Clears the currentUser and notifies listeners"
+    parameters: []
+    returns:
+      type: "Promise<void>"
+      description: "Resolves when sign out is complete"
+    dependencies: []
+    sideEffects:
+      - "Sets module-level currentUser to null"
+      - "Triggers all registered auth listeners with null"
+
+  - name: "seedCollection"
+    file: "app/src/services/firebase/index.ts"
+    line: 99
+    description: "Writes an array of records to the in-memory Firestore data store for a given collection path. Used to seed test/demo data"
+    parameters:
+      - name: "path"
+        type: "string"
+        description: "The Firestore collection path"
+      - name: "records"
+        type: "Record<string, any>[]"
+        description: "Array of document data objects to seed"
+    returns:
+      type: "void"
+      description: "No return value"
+    dependencies: []
+    sideEffects:
+      - "Writes to in-memory firestoreData store"
+
+  - name: "seedDocument"
+    file: "app/src/services/firebase/index.ts"
+    line: 107
+    description: "Writes a single document to the in-memory Firestore data store. Notifies any active listeners"
+    parameters:
+      - name: "path"
+        type: "string"
+        description: "The Firestore collection path"
+      - name: "docId"
+        type: "string"
+        description: "The document ID"
+      - name: "data"
+        type: "any"
+        description: "The document data"
+    returns:
+      type: "void"
+      description: "No return value"
+    dependencies: []
+    sideEffects:
+      - "Writes to in-memory firestoreData store"
+      - "Notifies document listeners"
+      - "Notifies collection listeners"
+
+  - name: "clearAllFirestoreData"
+    file: "app/src/services/firebase/index.ts"
+    line: 116
+    description: "Clears all data from the in-memory Firestore store. Used for testing"
+    parameters: []
+    returns:
+      type: "void"
+      description: "No return value"
+    dependencies: []
+    sideEffects:
+      - "Deletes all keys from firestoreData"
+
+  - name: "seedFirestore"
+    file: "app/src/services/firebase/seedData.ts"
+    line: 5
+    description: "Seeds all demo data into the in-memory Firestore. Includes menu categories, menu items, customization groups, locations, promo banners, houston events, Z exclusive content, daily rituals, wordle scores, promo codes, and Z society whitelist. Only runs once (idempotent)"
+    parameters: []
+    returns:
+      type: "void"
+      description: "No return value"
+    dependencies:
+      - "seedCollection"
+      - "seedDocument"
+    sideEffects:
+      - "Populates Firestore collections: menu_categories, menu_items, customization_groups, locations, promo_banners, houston_events, z_exclusive_content, daily_rituals, wordle_scores, promo_codes, zsociety_whitelist"
+
+  - name: "seedZMember"
+    file: "app/src/services/firebase/seedData.ts"
+    line: 185
+    description: "Seeds the given email into the zsociety_whitelist collection so the user appears as a Z Society member in the demo"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "User email to add to the whitelist (normalized to lowercase)"
+    returns:
+      type: "void"
+      description: "No return value"
+    dependencies:
+      - "seedDocument"
+    sideEffects:
+      - "Writes to Firestore collection 'zsociety_whitelist'"
+
+  - name: "functions.httpsCallable"
+    file: "app/src/services/firebase/index.ts"
+    line: 323
+    description: "Mock Firebase Cloud Functions callable. Returns a function that logs the call and resolves with { data: { success: true } }"
+    parameters:
+      - name: "name"
+        type: "string"
+        description: "The cloud function name"
+    returns:
+      type: "(data?: any) => Promise<{ data: { success: true } }>"
+      description: "An async function that simulates a cloud function call"
+    dependencies: []
+    sideEffects:
+      - "Logs to console"
+
+  - name: "messaging.getToken"
+    file: "app/src/services/firebase/index.ts"
+    line: 330
+    description: "Mock FCM token retrieval. Returns a static mock token"
+    parameters: []
+    returns:
+      type: "Promise<string>"
+      description: "Always returns 'mock-fcm-token'"
+    dependencies: []
+    sideEffects: []

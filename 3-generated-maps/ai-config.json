@@ -1,0 +1,9 @@
+{
+  "serviceMapping": {
+    "targetService": "cafe",
+    "basePath": ".",
+    "serviceMapPath": "./ai-service-map.json",
+    "documentationMapPath": "./ai-docs-map.json",
+    "documentationOutputDir": "./documentation"
+  }
+}

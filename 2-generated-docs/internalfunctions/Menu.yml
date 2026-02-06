@@ -1,0 +1,70 @@
+service: "Menu"
+functions:
+  - name: "getCategories"
+    file: "app/src/services/menuService.ts"
+    line: 5
+    description: "Fetches all menu categories ordered by sortOrder ascending"
+    parameters: []
+    returns:
+      type: "Promise<MenuCategory[]>"
+      description: "Array of menu categories with id, name, sortOrder, isSeasonal, isActive"
+    dependencies:
+      - "firestore.collection('menu_categories')"
+    sideEffects: []
+
+  - name: "getItemsByCategory"
+    file: "app/src/services/menuService.ts"
+    line: 10
+    description: "Fetches all menu items for a specific category, ordered by sortOrder ascending"
+    parameters:
+      - name: "categoryId"
+        type: "string"
+        description: "The category ID to filter items by"
+    returns:
+      type: "Promise<MenuItem[]>"
+      description: "Array of menu items belonging to the specified category"
+    dependencies:
+      - "firestore.collection('menu_items')"
+    sideEffects: []
+
+  - name: "getAllItems"
+    file: "app/src/services/menuService.ts"
+    line: 19
+    description: "Fetches all menu items regardless of category, ordered by sortOrder ascending"
+    parameters: []
+    returns:
+      type: "Promise<MenuItem[]>"
+      description: "Array of all menu items"
+    dependencies:
+      - "firestore.collection('menu_items')"
+    sideEffects: []
+
+  - name: "getItemById"
+    file: "app/src/services/menuService.ts"
+    line: 24
+    description: "Fetches a single menu item by its ID"
+    parameters:
+      - name: "itemId"
+        type: "string"
+        description: "The menu item ID to look up"
+    returns:
+      type: "Promise<MenuItem | null>"
+      description: "The menu item if found, or null if not found"
+    dependencies:
+      - "firestore.collection('menu_items')"
+    sideEffects: []
+
+  - name: "getCustomizationGroups"
+    file: "app/src/services/menuService.ts"
+    line: 30
+    description: "Fetches customization groups for a list of group IDs (e.g. milk choice, espresso/matcha choice)"
+    parameters:
+      - name: "groupIds"
+        type: "string[]"
+        description: "Array of customization group IDs to fetch"
+    returns:
+      type: "Promise<CustomizationGroup[]>"
+      description: "Array of customization groups with their options"
+    dependencies:
+      - "firestore.collection('customization_groups')"
+    sideEffects: []

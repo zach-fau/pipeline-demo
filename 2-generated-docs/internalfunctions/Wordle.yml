@@ -1,0 +1,71 @@
+service: "Wordle"
+functions:
+  - name: "getDailyWord"
+    file: "app/src/utils/wordleLogic.ts"
+    line: 19
+    description: "Returns a deterministic 5-letter word for a given date string. Uses a hash of the date to select from a list of cafe/coffee-themed words"
+    parameters:
+      - name: "dateString"
+        type: "string"
+        description: "Date in YYYY-MM-DD format"
+    returns:
+      type: "string"
+      description: "A 5-letter uppercase word from the word list"
+    dependencies: []
+    sideEffects: []
+
+  - name: "checkGuess"
+    file: "app/src/utils/wordleLogic.ts"
+    line: 31
+    description: "Compares a guess against the solution and returns letter statuses. Uses two-pass algorithm: first marks correct positions, then marks present-but-wrong-position letters"
+    parameters:
+      - name: "guess"
+        type: "string"
+        description: "The 5-letter guess (uppercase)"
+      - name: "solution"
+        type: "string"
+        description: "The 5-letter solution word (uppercase)"
+    returns:
+      type: "LetterStatus[]"
+      description: "Array of 5 statuses: 'correct', 'present', or 'absent' for each letter"
+    dependencies: []
+    sideEffects: []
+
+  - name: "getKeyboardStatuses"
+    file: "app/src/utils/wordleLogic.ts"
+    line: 60
+    description: "Computes the aggregate status of each letter key based on all guesses made so far. Priority: correct > present > absent"
+    parameters:
+      - name: "guesses"
+        type: "WordleGuess[]"
+        description: "Array of all guesses with their letter statuses"
+    returns:
+      type: "Record<string, LetterStatus>"
+      description: "Map of letter to its best known status"
+    dependencies: []
+    sideEffects: []
+
+  - name: "isValidWord"
+    file: "app/src/utils/wordleLogic.ts"
+    line: 83
+    description: "Checks if a word is a valid 5-letter alphabetic string. Currently accepts any 5-letter alpha string (no dictionary validation)"
+    parameters:
+      - name: "word"
+        type: "string"
+        description: "The word to validate"
+    returns:
+      type: "boolean"
+      description: "True if the word is exactly 5 alphabetic characters"
+    dependencies: []
+    sideEffects: []
+
+  - name: "getTodayString"
+    file: "app/src/utils/wordleLogic.ts"
+    line: 89
+    description: "Returns the current date as a YYYY-MM-DD formatted string"
+    parameters: []
+    returns:
+      type: "string"
+      description: "Today's date in YYYY-MM-DD format"
+    dependencies: []
+    sideEffects: []

@@ -1,0 +1,4 @@
+service: "Menu"
+events:
+  emitted: []
+  consumed: []

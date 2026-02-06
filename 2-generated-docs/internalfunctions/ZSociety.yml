@@ -1,0 +1,30 @@
+service: "ZSociety"
+functions:
+  - name: "ZSocietyProvider"
+    file: "app/src/store/ZSocietyContext.tsx"
+    line: 12
+    description: "React context provider that determines if the current user is a Z Society member by listening to the zsociety_whitelist Firestore collection in real-time"
+    parameters:
+      - name: "children"
+        type: "ReactNode"
+        description: "Child components that will have access to Z Society context"
+    returns:
+      type: "JSX.Element"
+      description: "ZSocietyContext.Provider wrapping children"
+    dependencies:
+      - "useAuth"
+      - "firestore.collection('zsociety_whitelist').doc().onSnapshot()"
+    sideEffects:
+      - "Sets up real-time Firestore listener on the zsociety_whitelist document matching the user's email"
+
+  - name: "useZSociety"
+    file: "app/src/store/ZSocietyContext.tsx"
+    line: 49
+    description: "Custom hook to access Z Society membership status. Must be used within a ZSocietyProvider"
+    parameters: []
+    returns:
+      type: "ZSocietyContextType"
+      description: "Object with isZMember (boolean) and isLoading (boolean)"
+    dependencies:
+      - "ZSocietyContext"
+    sideEffects: []

@@ -1,0 +1,4 @@
+service: "Wordle"
+events:
+  emitted: []
+  consumed: []

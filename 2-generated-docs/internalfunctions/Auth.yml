@@ -1,0 +1,135 @@
+service: "Auth"
+functions:
+  - name: "signIn"
+    file: "app/src/services/authService.ts"
+    line: 5
+    description: "Signs in a user with email and password using Firebase auth"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "User's email address"
+      - name: "password"
+        type: "string"
+        description: "User's password"
+    returns:
+      type: "Promise<User>"
+      description: "The authenticated Firebase user object"
+    dependencies:
+      - "auth.signInWithEmailAndPassword"
+    sideEffects:
+      - "Sets currentUser in Firebase auth state"
+      - "Triggers onAuthStateChanged listeners"
+
+  - name: "signUp"
+    file: "app/src/services/authService.ts"
+    line: 10
+    description: "Creates a new user account with email, password, and display name. Also creates a user profile document in Firestore"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "User's email address"
+      - name: "password"
+        type: "string"
+        description: "User's password"
+      - name: "displayName"
+        type: "string"
+        description: "User's display name"
+    returns:
+      type: "Promise<User>"
+      description: "The newly created Firebase user object"
+    dependencies:
+      - "auth.createUserWithEmailAndPassword"
+      - "firestore.collection('users').doc().set()"
+    sideEffects:
+      - "Creates a new Firebase auth user"
+      - "Writes to Firestore collection 'users' with the user profile"
+      - "Triggers onAuthStateChanged listeners"
+
+  - name: "signOut"
+    file: "app/src/services/authService.ts"
+    line: 28
+    description: "Signs out the currently authenticated user"
+    parameters: []
+    returns:
+      type: "Promise<void>"
+      description: "Resolves when sign out is complete"
+    dependencies:
+      - "auth.signOut"
+    sideEffects:
+      - "Clears currentUser in Firebase auth state"
+      - "Triggers onAuthStateChanged listeners with null"
+
+  - name: "resetPassword"
+    file: "app/src/services/authService.ts"
+    line: 32
+    description: "Sends a password reset email to the specified address"
+    parameters:
+      - name: "email"
+        type: "string"
+        description: "Email address to send reset link to"
+    returns:
+      type: "Promise<void>"
+      description: "Resolves when the email is sent"
+    dependencies:
+      - "auth.sendPasswordResetEmail"
+    sideEffects:
+      - "Sends a password reset email (no-op in mock)"
+
+  - name: "getCurrentUser"
+    file: "app/src/services/authService.ts"
+    line: 36
+    description: "Returns the currently signed-in user or null"
+    parameters: []
+    returns:
+      type: "User | null"
+      description: "The current user object or null if not authenticated"
+    dependencies:
+      - "auth.currentUser"
+    sideEffects: []
+
+  - name: "onAuthStateChanged"
+    file: "app/src/services/authService.ts"
+    line: 38
+    description: "Registers a listener for authentication state changes"
+    parameters:
+      - name: "callback"
+        type: "(user: any) => void"
+        description: "Callback invoked with the user object or null on auth state change"
+    returns:
+      type: "() => void"
+      description: "Unsubscribe function to remove the listener"
+    dependencies:
+      - "auth.onAuthStateChanged"
+    sideEffects: []
+
+  - name: "AuthProvider"
+    file: "app/src/store/AuthContext.tsx"
+    line: 17
+    description: "React context provider that manages authentication state. Listens to Firebase auth state changes and provides sign-in, sign-up, sign-out, and password reset functions to child components"
+    parameters:
+      - name: "children"
+        type: "ReactNode"
+        description: "Child components that will have access to auth context"
+    returns:
+      type: "JSX.Element"
+      description: "AuthContext.Provider wrapping children"
+    dependencies:
+      - "authService.signIn"
+      - "authService.signUp"
+      - "authService.signOut"
+      - "authService.resetPassword"
+      - "authService.onAuthStateChanged"
+    sideEffects:
+      - "Subscribes to Firebase auth state changes on mount"
+
+  - name: "useAuth"
+    file: "app/src/store/AuthContext.tsx"
+    line: 83
+    description: "Custom hook to access the authentication context. Must be used within an AuthProvider"
+    parameters: []
+    returns:
+      type: "AuthContextType"
+      description: "Object containing user, isLoading, isAuthenticated, signIn, signUp, signOut, resetPassword"
+    dependencies:
+      - "AuthContext"
+    sideEffects: []

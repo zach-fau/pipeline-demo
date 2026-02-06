@@ -1,0 +1,778 @@
+{
+  "routes": {},
+  "actions": {
+    "auth.signIn": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "signIn",
+      "line": 5,
+      "description": "Signs in a user with email and password"
+    },
+    "auth.signUp": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "signUp",
+      "line": 10,
+      "description": "Creates a new user account and Firestore profile"
+    },
+    "auth.signOut": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "signOut",
+      "line": 28,
+      "description": "Signs out the currently authenticated user"
+    },
+    "auth.resetPassword": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "resetPassword",
+      "line": 32,
+      "description": "Sends a password reset email"
+    },
+    "auth.getCurrentUser": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "getCurrentUser",
+      "line": 36,
+      "description": "Returns the currently signed-in user or null"
+    },
+    "auth.onAuthStateChanged": {
+      "service": "Auth",
+      "sourceFile": "app/src/services/authService.ts",
+      "method": "onAuthStateChanged",
+      "line": 38,
+      "description": "Registers a listener for auth state changes"
+    },
+    "menu.getCategories": {
+      "service": "Menu",
+      "sourceFile": "app/src/services/menuService.ts",
+      "method": "getCategories",
+      "line": 5,
+      "description": "Fetches all menu categories ordered by sortOrder"
+    },
+    "menu.getItemsByCategory": {
+      "service": "Menu",
+      "sourceFile": "app/src/services/menuService.ts",
+      "method": "getItemsByCategory",
+      "line": 10,
+      "description": "Fetches menu items for a specific category"
+    },
+    "menu.getAllItems": {
+      "service": "Menu",
+      "sourceFile": "app/src/services/menuService.ts",
+      "method": "getAllItems",
+      "line": 19,
+      "description": "Fetches all menu items regardless of category"
+    },
+    "menu.getItemById": {
+      "service": "Menu",
+      "sourceFile": "app/src/services/menuService.ts",
+      "method": "getItemById",
+      "line": 24,
+      "description": "Fetches a single menu item by ID"
+    },
+    "menu.getCustomizationGroups": {
+      "service": "Menu",
+      "sourceFile": "app/src/services/menuService.ts",
+      "method": "getCustomizationGroups",
+      "line": 30,
+      "description": "Fetches customization groups by IDs"
+    },
+    "order.createOrder": {
+      "service": "Order",
+      "sourceFile": "app/src/services/orderService.ts",
+      "method": "createOrder",
+      "line": 21,
+      "description": "Creates a new order with tax calculation and promo validation"
+    },
+    "order.getOrdersByUser": {
+      "service": "Order",
+      "sourceFile": "app/src/services/orderService.ts",
+      "method": "getOrdersByUser",
+      "line": 67,
+      "description": "Fetches all orders for a user"
+    },
+    "order.getOrderById": {
+      "service": "Order",
+      "sourceFile": "app/src/services/orderService.ts",
+      "method": "getOrderById",
+      "line": 75,
+      "description": "Fetches a single order by ID"
+    },
+    "order.updateOrderStatus": {
+      "service": "Order",
+      "sourceFile": "app/src/services/orderService.ts",
+      "method": "updateOrderStatus",
+      "line": 81,
+      "description": "Updates order status in Firestore"
+    },
+    "order.validatePromoCode": {
+      "service": "Order",
+      "sourceFile": "app/src/services/orderService.ts",
+      "method": "validatePromoCode",
+      "line": 88,
+      "description": "Validates a promo code and computes discount"
+    },
+    "location.getLocations": {
+      "service": "Location",
+      "sourceFile": "app/src/services/locationService.ts",
+      "method": "getLocations",
+      "line": 18,
+      "description": "Fetches all cafe locations"
+    },
+    "location.getLocationById": {
+      "service": "Location",
+      "sourceFile": "app/src/services/locationService.ts",
+      "method": "getLocationById",
+      "line": 23,
+      "description": "Fetches a single location by ID"
+    },
+    "location.getNearestLocation": {
+      "service": "Location",
+      "sourceFile": "app/src/services/locationService.ts",
+      "method": "getNearestLocation",
+      "line": 29,
+      "description": "Finds the nearest location using haversine distance"
+    },
+    "firebase.seedFirestore": {
+      "service": "Firebase",
+      "sourceFile": "app/src/services/firebase/seedData.ts",
+      "method": "seedFirestore",
+      "line": 5,
+      "description": "Seeds all demo data into in-memory Firestore"
+    },
+    "firebase.seedZMember": {
+      "service": "Firebase",
+      "sourceFile": "app/src/services/firebase/seedData.ts",
+      "method": "seedZMember",
+      "line": 185,
+      "description": "Seeds a user email into the Z Society whitelist"
+    },
+    "firebase.seedCollection": {
+      "service": "Firebase",
+      "sourceFile": "app/src/services/firebase/index.ts",
+      "method": "seedCollection",
+      "line": 99,
+      "description": "Writes records to in-memory Firestore collection"
+    },
+    "firebase.seedDocument": {
+      "service": "Firebase",
+      "sourceFile": "app/src/services/firebase/index.ts",
+      "method": "seedDocument",
+      "line": 107,
+      "description": "Writes a single document to in-memory Firestore"
+    },
+    "firebase.clearAllFirestoreData": {
+      "service": "Firebase",
+      "sourceFile": "app/src/services/firebase/index.ts",
+      "method": "clearAllFirestoreData",
+      "line": 116,
+      "description": "Clears all in-memory Firestore data"
+    },
+    "wordle.getDailyWord": {
+      "service": "Wordle",
+      "sourceFile": "app/src/utils/wordleLogic.ts",
+      "method": "getDailyWord",
+      "line": 19,
+      "description": "Returns deterministic 5-letter word for a date"
+    },
+    "wordle.checkGuess": {
+      "service": "Wordle",
+      "sourceFile": "app/src/utils/wordleLogic.ts",
+      "method": "checkGuess",
+      "line": 31,
+      "description": "Compares guess against solution and returns letter statuses"
+    },
+    "wordle.getKeyboardStatuses": {
+      "service": "Wordle",
+      "sourceFile": "app/src/utils/wordleLogic.ts",
+      "method": "getKeyboardStatuses",
+      "line": 60,
+      "description": "Computes aggregate keyboard letter statuses from guesses"
+    },
+    "wordle.isValidWord": {
+      "service": "Wordle",
+      "sourceFile": "app/src/utils/wordleLogic.ts",
+      "method": "isValidWord",
+      "line": 83,
+      "description": "Checks if a word is valid 5-letter alphabetic string"
+    },
+    "wordle.getTodayString": {
+      "service": "Wordle",
+      "sourceFile": "app/src/utils/wordleLogic.ts",
+      "method": "getTodayString",
+      "line": 89,
+      "description": "Returns today's date as YYYY-MM-DD string"
+    }
+  },
+  "sourceFiles": {
+    "app/App.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["App"],
+      "dependencies": ["app/src/store/AuthContext.tsx", "app/src/store/ZSocietyContext.tsx", "app/src/store/LocationContext.tsx", "app/src/store/CartContext.tsx", "app/src/navigation/RootNavigator.tsx", "app/src/services/firebase/seedData.ts", "app/src/services/firebase/index.ts", "app/src/components/ui/ErrorBoundary.tsx"]
+    },
+    "app/src/services/authService.ts": {
+      "service": "Auth",
+      "type": "service",
+      "exports": ["authService"],
+      "dependencies": ["app/src/services/firebase/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/services/menuService.ts": {
+      "service": "Menu",
+      "type": "service",
+      "exports": ["menuService"],
+      "dependencies": ["app/src/services/firebase/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/services/orderService.ts": {
+      "service": "Order",
+      "type": "service",
+      "exports": ["orderService", "PromoCode", "PromoValidation"],
+      "dependencies": ["app/src/services/firebase/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/services/locationService.ts": {
+      "service": "Location",
+      "type": "service",
+      "exports": ["locationService"],
+      "dependencies": ["app/src/services/firebase/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/services/firebase/index.ts": {
+      "service": "Firebase",
+      "type": "service",
+      "exports": ["auth", "firestore", "functions", "messaging", "seedCollection", "seedDocument", "clearAllFirestoreData"],
+      "dependencies": []
+    },
+    "app/src/services/firebase/seedData.ts": {
+      "service": "Firebase",
+      "type": "service",
+      "exports": ["seedFirestore", "seedZMember"],
+      "dependencies": ["app/src/services/firebase/index.ts"]
+    },
+    "app/src/store/AuthContext.tsx": {
+      "service": "Auth",
+      "type": "hook",
+      "exports": ["AuthProvider", "useAuth"],
+      "dependencies": ["app/src/services/authService.ts", "app/src/types/index.ts"]
+    },
+    "app/src/store/CartContext.tsx": {
+      "service": "Order",
+      "type": "hook",
+      "exports": ["CartProvider", "useCart"],
+      "dependencies": ["app/src/types/index.ts", "app/src/services/orderService.ts"]
+    },
+    "app/src/store/LocationContext.tsx": {
+      "service": "Location",
+      "type": "hook",
+      "exports": ["LocationProvider", "useLocation"],
+      "dependencies": ["app/src/types/index.ts"]
+    },
+    "app/src/store/ZSocietyContext.tsx": {
+      "service": "ZSociety",
+      "type": "hook",
+      "exports": ["ZSocietyProvider", "useZSociety"],
+      "dependencies": ["app/src/store/AuthContext.tsx", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/types/index.ts": {
+      "service": "Navigation",
+      "type": "type",
+      "exports": ["Timestamp", "UserProfile", "ZSocietyWhitelistEntry", "Location", "StoreHours", "DayHours", "MenuCategory", "MenuItem", "CustomizationGroup", "CustomizationOption", "CartItem", "SelectedCustomization", "Order", "OrderItem", "OrderStatus", "PromoBanner", "WordleDaily", "WordleScore", "LetterStatus", "WordleGuess", "WordleGameState", "HoustonEvent", "EventCategory", "ZExclusiveContent", "AnonymousSubmission", "AnonymousCategory", "DailyRitual", "RitualCategory", "RitualHistory", "MemoryCard", "MemoryGameState", "MemoryGameScore", "RootStackParamList", "AuthStackParamList", "MainTabParamList", "HomeStackParamList", "OrderStackParamList", "AccountStackParamList", "ZWordleStackParamList", "ZEventsStackParamList", "ZClubStackParamList"],
+      "dependencies": []
+    },
+    "app/src/utils/wordleLogic.ts": {
+      "service": "Wordle",
+      "type": "utility",
+      "exports": ["getDailyWord", "checkGuess", "getKeyboardStatuses", "isValidWord", "getTodayString"],
+      "dependencies": ["app/src/types/index.ts"]
+    },
+    "app/src/constants/colors.ts": {
+      "service": "Navigation",
+      "type": "config",
+      "exports": ["Colors"],
+      "dependencies": []
+    },
+    "app/src/constants/typography.ts": {
+      "service": "Navigation",
+      "type": "config",
+      "exports": ["Typography"],
+      "dependencies": []
+    },
+    "app/src/constants/spacing.ts": {
+      "service": "Navigation",
+      "type": "config",
+      "exports": ["Spacing", "BorderRadius", "IconSize"],
+      "dependencies": []
+    },
+    "app/src/constants/config.ts": {
+      "service": "Navigation",
+      "type": "config",
+      "exports": ["Config", "FirebaseCollections"],
+      "dependencies": []
+    },
+    "app/src/constants/index.ts": {
+      "service": "Navigation",
+      "type": "config",
+      "exports": ["Colors", "Typography", "Spacing", "BorderRadius", "IconSize", "Config", "FirebaseCollections"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts", "app/src/constants/spacing.ts", "app/src/constants/config.ts"]
+    },
+    "app/src/navigation/RootNavigator.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["RootNavigator"],
+      "dependencies": ["app/src/types/index.ts", "app/src/store/AuthContext.tsx", "app/src/screens/auth/SplashScreen.tsx", "app/src/navigation/AuthStack.tsx", "app/src/navigation/MainTabNavigator.tsx"]
+    },
+    "app/src/navigation/MainTabNavigator.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["MainTabNavigator"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/store/ZSocietyContext.tsx", "app/src/navigation/HomeStack.tsx", "app/src/navigation/OrderStack.tsx", "app/src/navigation/AccountStack.tsx", "app/src/navigation/ZWordleStack.tsx", "app/src/navigation/ZEventsStack.tsx", "app/src/navigation/ZClubStack.tsx", "app/src/screens/zsociety/DailyRitualScreen.tsx", "app/src/screens/zsociety/MemoryGameScreen.tsx"]
+    },
+    "app/src/navigation/AuthStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["AuthStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/screens/auth/LoginScreen.tsx", "app/src/screens/auth/SignUpScreen.tsx", "app/src/screens/auth/ForgotPasswordScreen.tsx"]
+    },
+    "app/src/navigation/HomeStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["HomeStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/home/HomeScreen.tsx", "app/src/screens/home/RewardsDetailScreen.tsx"]
+    },
+    "app/src/navigation/OrderStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["OrderStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/order/LocationSelectScreen.tsx", "app/src/screens/order/MenuScreen.tsx", "app/src/screens/order/ProductDetailScreen.tsx", "app/src/screens/order/CartScreen.tsx", "app/src/screens/order/CheckoutScreen.tsx"]
+    },
+    "app/src/navigation/AccountStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["AccountStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/account/AccountScreen.tsx", "app/src/screens/account/OrderHistoryScreen.tsx", "app/src/screens/account/SettingsScreen.tsx"]
+    },
+    "app/src/navigation/ZWordleStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["ZWordleStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/zsociety/WordleScreen.tsx", "app/src/screens/zsociety/LeaderboardScreen.tsx"]
+    },
+    "app/src/navigation/ZEventsStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["ZEventsStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/zsociety/HoustonEventsScreen.tsx", "app/src/screens/zsociety/EventDetailScreen.tsx"]
+    },
+    "app/src/navigation/ZClubStack.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["ZClubStack"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/screens/zsociety/ZExclusiveScreen.tsx", "app/src/screens/zsociety/AnonymousPortalScreen.tsx"]
+    },
+    "app/src/screens/auth/LoginScreen.tsx": {
+      "service": "Auth",
+      "type": "component",
+      "exports": ["LoginScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Input.tsx", "app/src/store/AuthContext.tsx"]
+    },
+    "app/src/screens/auth/SignUpScreen.tsx": {
+      "service": "Auth",
+      "type": "component",
+      "exports": ["SignUpScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Input.tsx", "app/src/store/AuthContext.tsx"]
+    },
+    "app/src/screens/auth/ForgotPasswordScreen.tsx": {
+      "service": "Auth",
+      "type": "component",
+      "exports": ["ForgotPasswordScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Input.tsx", "app/src/store/AuthContext.tsx"]
+    },
+    "app/src/screens/auth/SplashScreen.tsx": {
+      "service": "Auth",
+      "type": "component",
+      "exports": ["SplashScreen"],
+      "dependencies": ["app/src/constants/index.ts"]
+    },
+    "app/src/screens/home/HomeScreen.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["HomeScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Card.tsx", "app/src/components/ui/Badge.tsx", "app/src/components/ui/Skeleton.tsx", "app/src/components/home/PromoBanner.tsx", "app/src/components/home/QuickReorder.tsx", "app/src/components/home/RewardsCard.tsx", "app/src/store/AuthContext.tsx", "app/src/store/CartContext.tsx"]
+    },
+    "app/src/screens/home/RewardsDetailScreen.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["RewardsDetailScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Card.tsx", "app/src/components/ui/ProgressRing.tsx", "app/src/store/AuthContext.tsx"]
+    },
+    "app/src/screens/order/LocationSelectScreen.tsx": {
+      "service": "Location",
+      "type": "component",
+      "exports": ["LocationSelectScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Input.tsx", "app/src/components/ui/Button.tsx", "app/src/components/ui/Skeleton.tsx", "app/src/store/LocationContext.tsx", "app/src/services/locationService.ts"]
+    },
+    "app/src/screens/order/MenuScreen.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["MenuScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/store/LocationContext.tsx", "app/src/store/CartContext.tsx", "app/src/services/menuService.ts", "app/src/components/menu/CategoryTabs.tsx", "app/src/components/menu/ProductGrid.tsx", "app/src/components/cart/CartFloatingBar.tsx", "app/src/components/ui/Skeleton.tsx"]
+    },
+    "app/src/screens/order/ProductDetailScreen.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["ProductDetailScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/store/CartContext.tsx", "app/src/services/menuService.ts", "app/src/components/menu/CustomizationGroup.tsx", "app/src/components/ui/Skeleton.tsx"]
+    },
+    "app/src/screens/order/CartScreen.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["CartScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/store/CartContext.tsx", "app/src/store/LocationContext.tsx", "app/src/components/cart/CartItem.tsx", "app/src/components/cart/PromoCodeInput.tsx"]
+    },
+    "app/src/screens/order/CheckoutScreen.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["CheckoutScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Card.tsx", "app/src/store/CartContext.tsx", "app/src/store/LocationContext.tsx", "app/src/store/AuthContext.tsx", "app/src/services/orderService.ts"]
+    },
+    "app/src/screens/account/AccountScreen.tsx": {
+      "service": "Auth",
+      "type": "component",
+      "exports": ["AccountScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Card.tsx", "app/src/store/AuthContext.tsx", "app/src/store/ZSocietyContext.tsx"]
+    },
+    "app/src/screens/account/OrderHistoryScreen.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["OrderHistoryScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/store/AuthContext.tsx", "app/src/services/orderService.ts", "app/src/types/index.ts", "app/src/components/ui/Skeleton.tsx"]
+    },
+    "app/src/screens/account/SettingsScreen.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["SettingsScreen"],
+      "dependencies": ["app/src/constants/index.ts"]
+    },
+    "app/src/screens/zsociety/WordleScreen.tsx": {
+      "service": "Wordle",
+      "type": "component",
+      "exports": ["WordleScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/zsociety/WordleGrid.tsx", "app/src/components/zsociety/WordleKeyboard.tsx", "app/src/utils/wordleLogic.ts"]
+    },
+    "app/src/screens/zsociety/LeaderboardScreen.tsx": {
+      "service": "Wordle",
+      "type": "component",
+      "exports": ["LeaderboardScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/services/firebase/index.ts", "app/src/components/ui/Skeleton.tsx"]
+    },
+    "app/src/screens/zsociety/HoustonEventsScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["HoustonEventsScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/screens/zsociety/EventDetailScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["EventDetailScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/components/ui/Card.tsx"]
+    },
+    "app/src/screens/zsociety/ZExclusiveScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["ZExclusiveScreen"],
+      "dependencies": ["app/src/types/index.ts", "app/src/constants/index.ts", "app/src/components/ui/Card.tsx", "app/src/components/ui/Button.tsx", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/screens/zsociety/AnonymousPortalScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["AnonymousPortalScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/types/index.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/screens/zsociety/DailyRitualScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["DailyRitualScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Card.tsx", "app/src/components/ui/FrostedOverlay.tsx", "app/src/types/index.ts", "app/src/utils/wordleLogic.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/screens/zsociety/MemoryGameScreen.tsx": {
+      "service": "ZSociety",
+      "type": "component",
+      "exports": ["MemoryGameScreen"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx", "app/src/utils/wordleLogic.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/cart/CartFloatingBar.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["CartFloatingBar"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/store/CartContext.tsx"]
+    },
+    "app/src/components/cart/CartItem.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["CartItemComponent"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/cart/PromoCodeInput.tsx": {
+      "service": "Order",
+      "type": "component",
+      "exports": ["PromoCodeInput"],
+      "dependencies": ["app/src/constants/index.ts"]
+    },
+    "app/src/components/home/PromoBanner.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["PromoBanner"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/components/home/QuickReorder.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["QuickReorder"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/Button.tsx"]
+    },
+    "app/src/components/home/RewardsCard.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["RewardsCard"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/components/ui/ProgressRing.tsx"]
+    },
+    "app/src/components/menu/CategoryTabs.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["CategoryTabs"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/menu/CustomizationGroup.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["CustomizationGroupComponent"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/menu/ProductCard.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["ProductCard"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/menu/ProductGrid.tsx": {
+      "service": "Menu",
+      "type": "component",
+      "exports": ["ProductGrid"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts", "app/src/components/menu/ProductCard.tsx"]
+    },
+    "app/src/components/ui/Badge.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Badge"],
+      "dependencies": ["app/src/constants/colors.ts"]
+    },
+    "app/src/components/ui/Button.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Button"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts", "app/src/constants/spacing.ts"]
+    },
+    "app/src/components/ui/Card.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Card"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/spacing.ts"]
+    },
+    "app/src/components/ui/ErrorBoundary.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["ErrorBoundary"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts", "app/src/constants/spacing.ts", "app/src/components/ui/Button.tsx"]
+    },
+    "app/src/components/ui/FrostedOverlay.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["FrostedOverlay"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts", "app/src/constants/spacing.ts"]
+    },
+    "app/src/components/ui/index.ts": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Button", "Card", "Input", "Badge", "ProgressRing", "FrostedOverlay", "Skeleton"],
+      "dependencies": ["app/src/components/ui/Button.tsx", "app/src/components/ui/Card.tsx", "app/src/components/ui/Input.tsx", "app/src/components/ui/Badge.tsx", "app/src/components/ui/ProgressRing.tsx", "app/src/components/ui/FrostedOverlay.tsx", "app/src/components/ui/Skeleton.tsx"]
+    },
+    "app/src/components/ui/Input.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Input"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts", "app/src/constants/spacing.ts"]
+    },
+    "app/src/components/ui/ProgressRing.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["ProgressRing"],
+      "dependencies": ["app/src/constants/colors.ts", "app/src/constants/typography.ts"]
+    },
+    "app/src/components/ui/Skeleton.tsx": {
+      "service": "Navigation",
+      "type": "component",
+      "exports": ["Skeleton"],
+      "dependencies": ["app/src/constants/colors.ts"]
+    },
+    "app/src/components/zsociety/WordleGrid.tsx": {
+      "service": "Wordle",
+      "type": "component",
+      "exports": ["WordleGrid"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/components/zsociety/WordleKeyboard.tsx": {
+      "service": "Wordle",
+      "type": "component",
+      "exports": ["WordleKeyboard"],
+      "dependencies": ["app/src/constants/index.ts", "app/src/types/index.ts"]
+    },
+    "app/src/services/__tests__/menuService.test.ts": {
+      "service": "Menu",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/services/menuService.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/services/__tests__/orderService.test.ts": {
+      "service": "Order",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/services/orderService.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/services/__tests__/locationService.test.ts": {
+      "service": "Location",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/services/locationService.ts", "app/src/services/firebase/index.ts"]
+    },
+    "app/src/services/firebase/__tests__/firebase.test.ts": {
+      "service": "Firebase",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/services/firebase/index.ts"]
+    },
+    "app/src/store/__tests__/CartContext.test.tsx": {
+      "service": "Order",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/store/CartContext.tsx"]
+    },
+    "app/src/utils/__tests__/wordleLogic.test.ts": {
+      "service": "Wordle",
+      "type": "test",
+      "exports": [],
+      "dependencies": ["app/src/utils/wordleLogic.ts"]
+    }
+  },
+  "screens": {
+    "SplashScreen": {
+      "service": "Auth",
+      "sourceFile": "app/src/screens/auth/SplashScreen.tsx",
+      "description": "Animated splash screen shown while authentication state is loading"
+    },
+    "LoginScreen": {
+      "service": "Auth",
+      "sourceFile": "app/src/screens/auth/LoginScreen.tsx",
+      "description": "User login form with email/password, social sign-in options, and navigation to sign-up/forgot password"
+    },
+    "SignUpScreen": {
+      "service": "Auth",
+      "sourceFile": "app/src/screens/auth/SignUpScreen.tsx",
+      "description": "New account registration form with name, email, password, and confirmation"
+    },
+    "ForgotPasswordScreen": {
+      "service": "Auth",
+      "sourceFile": "app/src/screens/auth/ForgotPasswordScreen.tsx",
+      "description": "Password reset form that sends a reset link via email"
+    },
+    "HomeScreen": {
+      "service": "Navigation",
+      "sourceFile": "app/src/screens/home/HomeScreen.tsx",
+      "description": "Main home screen with promo banners, start order CTA, quick reorder, rewards card, and promotional content"
+    },
+    "RewardsDetailScreen": {
+      "service": "Order",
+      "sourceFile": "app/src/screens/home/RewardsDetailScreen.tsx",
+      "description": "Detailed rewards view with progress ring, hearts tracking, tier information, and how-it-works guide"
+    },
+    "LocationSelectScreen": {
+      "service": "Location",
+      "sourceFile": "app/src/screens/order/LocationSelectScreen.tsx",
+      "description": "Store location picker with search, map placeholder, and location cards with hours and order buttons"
+    },
+    "MenuScreen": {
+      "service": "Menu",
+      "sourceFile": "app/src/screens/order/MenuScreen.tsx",
+      "description": "Menu browsing screen with category tabs, product grid, quick-add, and floating cart bar"
+    },
+    "ProductDetailScreen": {
+      "service": "Menu",
+      "sourceFile": "app/src/screens/order/ProductDetailScreen.tsx",
+      "description": "Product detail view with customization options, quantity selector, and add-to-cart button"
+    },
+    "CartScreen": {
+      "service": "Order",
+      "sourceFile": "app/src/screens/order/CartScreen.tsx",
+      "description": "Shopping cart view with item list, promo code input, quantity editing, and checkout navigation"
+    },
+    "CheckoutScreen": {
+      "service": "Order",
+      "sourceFile": "app/src/screens/order/CheckoutScreen.tsx",
+      "description": "Order checkout with summary, pickup details, tax calculation, promo discount, and place order button"
+    },
+    "AccountScreen": {
+      "service": "Auth",
+      "sourceFile": "app/src/screens/account/AccountScreen.tsx",
+      "description": "User account profile with avatar, rewards summary, menu links, and sign-out option"
+    },
+    "OrderHistoryScreen": {
+      "service": "Order",
+      "sourceFile": "app/src/screens/account/OrderHistoryScreen.tsx",
+      "description": "List of past orders with location, status, items, and total"
+    },
+    "SettingsScreen": {
+      "service": "Navigation",
+      "sourceFile": "app/src/screens/account/SettingsScreen.tsx",
+      "description": "App settings with push/email notification toggles and about links"
+    },
+    "WordleScreen": {
+      "service": "Wordle",
+      "sourceFile": "app/src/screens/zsociety/WordleScreen.tsx",
+      "description": "Daily wordle game with grid, keyboard, haptic feedback, and AsyncStorage persistence"
+    },
+    "LeaderboardScreen": {
+      "service": "Wordle",
+      "sourceFile": "app/src/screens/zsociety/LeaderboardScreen.tsx",
+      "description": "Wordle leaderboard showing top players with avg guesses, games played, and win rate"
+    },
+    "HoustonEventsScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/HoustonEventsScreen.tsx",
+      "description": "Houston events listing with category filters and event cards"
+    },
+    "EventDetailScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/EventDetailScreen.tsx",
+      "description": "Event detail view with venue, date/time, description, and directions button"
+    },
+    "ZExclusiveScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/ZExclusiveScreen.tsx",
+      "description": "Z Society exclusive content feed with segmented control for exclusive content and anonymous portal"
+    },
+    "AnonymousPortalScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/AnonymousPortalScreen.tsx",
+      "description": "Anonymous feedback submission form with category selection and privacy notice"
+    },
+    "DailyRitualScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/DailyRitualScreen.tsx",
+      "description": "Daily ritual reveal card with frosted overlay animation and ritual history tracking"
+    },
+    "MemoryGameScreen": {
+      "service": "ZSociety",
+      "sourceFile": "app/src/screens/zsociety/MemoryGameScreen.tsx",
+      "description": "Memory card matching game with flip animations, timer, flip counter, and daily persistence"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+service: "Location"
+functions:
+  - name: "getLocations"
+    file: "app/src/services/locationService.ts"
+    line: 18
+    description: "Fetches all cafe locations from Firestore"
+    parameters: []
+    returns:
+      type: "Promise<Location[]>"
+      description: "Array of all Location objects with address, hours, coordinates, etc."
+    dependencies:
+      - "firestore.collection('locations')"
+    sideEffects: []
+
+  - name: "getLocationById"
+    file: "app/src/services/locationService.ts"
+    line: 23
+    description: "Fetches a single location by its document ID"
+    parameters:
+      - name: "id"
+        type: "string"
+        description: "The location document ID"
+    returns:
+      type: "Promise<Location | null>"
+      description: "The location if found, or null"
+    dependencies:
+      - "firestore.collection('locations')"
+    sideEffects: []
+
+  - name: "getNearestLocation"
+    file: "app/src/services/locationService.ts"
+    line: 29
+    description: "Finds the nearest cafe location to the given coordinates using haversine distance formula"
+    parameters:
+      - name: "lat"
+        type: "number"
+        description: "User's latitude"
+      - name: "lng"
+        type: "number"
+        description: "User's longitude"
+    returns:
+      type: "Promise<Location>"
+      description: "The nearest Location object"
+    dependencies:
+      - "locationService.getLocations"
+      - "haversineDistance"
+    sideEffects: []
+
+  - name: "haversineDistance"
+    file: "app/src/services/locationService.ts"
+    line: 4
+    description: "Calculates the distance in miles between two geographic coordinates using the haversine formula"
+    parameters:
+      - name: "lat1"
+        type: "number"
+        description: "Latitude of first point"
+      - name: "lon1"
+        type: "number"
+        description: "Longitude of first point"
+      - name: "lat2"
+        type: "number"
+        description: "Latitude of second point"
+      - name: "lon2"
+        type: "number"
+        description: "Longitude of second point"
+    returns:
+      type: "number"
+      description: "Distance in miles between the two points"
+    dependencies: []
+    sideEffects: []
+
+  - name: "LocationProvider"
+    file: "app/src/store/LocationContext.tsx"
+    line: 14
+    description: "React context provider that manages the selected pickup location and time"
+    parameters:
+      - name: "children"
+        type: "ReactNode"
+        description: "Child components that will have access to location context"
+    returns:
+      type: "JSX.Element"
+      description: "LocationContext.Provider wrapping children"
+    dependencies: []
+    sideEffects: []
+
+  - name: "useLocation"
+    file: "app/src/store/LocationContext.tsx"
+    line: 36
+    description: "Custom hook to access the location context. Must be used within a LocationProvider"
+    parameters: []
+    returns:
+      type: "LocationContextType"
+      description: "Object with selectedLocation, pickupTime, setSelectedLocation, setPickupTime, clearLocation"
+    dependencies:
+      - "LocationContext"
+    sideEffects: []

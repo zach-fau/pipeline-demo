@@ -1,0 +1,58 @@
+service: "Navigation"
+functions:
+  - name: "RootNavigator"
+    file: "app/src/navigation/RootNavigator.tsx"
+    line: 12
+    description: "Root navigation container. Shows SplashScreen while auth is loading, then either AuthStack (unauthenticated) or MainTabNavigator (authenticated)"
+    parameters: []
+    returns:
+      type: "JSX.Element"
+      description: "NavigationContainer with conditional auth/main stacks"
+    dependencies:
+      - "useAuth"
+      - "SplashScreen"
+      - "AuthStack"
+      - "MainTabNavigator"
+    sideEffects: []
+
+  - name: "MainTabNavigator"
+    file: "app/src/navigation/MainTabNavigator.tsx"
+    line: 63
+    description: "Bottom tab navigator. Always shows Home, Order, and Account tabs. Conditionally shows Wordle, Events, Z-Club, Ritual, and Memory tabs when the user is a Z Society member. Z Society tabs animate in with staggered spring animations"
+    parameters: []
+    returns:
+      type: "JSX.Element"
+      description: "Bottom tab navigator with conditional Z Society tabs"
+    dependencies:
+      - "useZSociety"
+      - "HomeStack"
+      - "OrderStack"
+      - "AccountStack"
+      - "ZWordleStack"
+      - "ZEventsStack"
+      - "ZClubStack"
+      - "DailyRitualScreen"
+      - "MemoryGameScreen"
+    sideEffects: []
+
+  - name: "App"
+    file: "app/App.tsx"
+    line: 41
+    description: "Root application component. Wraps the app in ErrorBoundary, GestureHandlerRootView, SafeAreaProvider, and the context providers (Auth, ZSociety, Location, Cart). Seeds Firestore demo data at module load time"
+    parameters: []
+    returns:
+      type: "JSX.Element"
+      description: "The fully wrapped application tree"
+    dependencies:
+      - "seedFirestore"
+      - "seedZMember"
+      - "auth.onAuthStateChanged"
+      - "AuthProvider"
+      - "ZSocietyProvider"
+      - "LocationProvider"
+      - "CartProvider"
+      - "RootNavigator"
+      - "ErrorBoundary"
+    sideEffects:
+      - "Seeds Firestore data at module load"
+      - "Seeds logged-in user as Z Society member on auth state change"

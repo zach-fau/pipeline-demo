@@ -1,0 +1,22 @@
+service: "Firebase"
+events:
+  emitted:
+    - name: "auth.onAuthStateChanged"
+      description: "Fires whenever the authentication state changes (sign in, sign out, or initial state resolution). Immediately fires with the current state when a new listener is registered"
+      payload:
+        user: "{ uid: string, email: string, displayName: string } | null — The current user or null if signed out"
+      emittedFrom: "app/src/services/firebase/index.ts:signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut"
+
+    - name: "firestore.collection.onSnapshot"
+      description: "Fires whenever the data in a Firestore collection changes. Immediately fires with the current snapshot when a listener is registered. Supports filtered/sorted queries via the query chain"
+      payload:
+        docs: "DocSnapshot[] — Array of document snapshots with id, data(), exists"
+      emittedFrom: "app/src/services/firebase/index.ts:notifyCollectionListeners"
+
+    - name: "firestore.doc.onSnapshot"
+      description: "Fires whenever a specific Firestore document changes. Immediately fires with the current snapshot when a listener is registered"
+      payload:
+        snap: "{ exists: boolean, data: () => any, id: string } — Document snapshot"
+      emittedFrom: "app/src/services/firebase/index.ts:notifyDocListeners"
+
+  consumed: []

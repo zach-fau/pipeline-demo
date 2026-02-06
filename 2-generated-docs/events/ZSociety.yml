@@ -1,0 +1,7 @@
+service: "ZSociety"
+events:
+  emitted: []
+  consumed:
+    - name: "firestore.zsociety_whitelist.onSnapshot"
+      handler: "app/src/store/ZSocietyContext.tsx:ZSocietyProvider"
+      description: "Listens for real-time changes to the Z Society whitelist document for the current user's email. Sets isZMember to true if the document exists and isActive is true"

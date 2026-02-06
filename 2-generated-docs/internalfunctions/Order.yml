@@ -1,0 +1,147 @@
+service: "Order"
+functions:
+  - name: "createOrder"
+    file: "app/src/services/orderService.ts"
+    line: 21
+    description: "Creates a new order in Firestore. Calculates subtotal, tax (8.25% Houston TX rate), validates promo code if provided, and computes the final total"
+    parameters:
+      - name: "userId"
+        type: "string"
+        description: "The UID of the user placing the order"
+      - name: "locationId"
+        type: "string"
+        description: "The ID of the pickup location"
+      - name: "locationName"
+        type: "string"
+        description: "The display name of the pickup location"
+      - name: "items"
+        type: "CartItem[]"
+        description: "Array of cart items to include in the order"
+      - name: "promoCode"
+        type: "string | undefined"
+        description: "Optional promo code to apply"
+    returns:
+      type: "Promise<Order>"
+      description: "The created order with generated ID and all computed fields"
+    dependencies:
+      - "firestore.collection('orders')"
+      - "orderService.validatePromoCode"
+    sideEffects:
+      - "Writes a new document to Firestore collection 'orders'"
+
+  - name: "getOrdersByUser"
+    file: "app/src/services/orderService.ts"
+    line: 67
+    description: "Fetches all orders placed by a specific user"
+    parameters:
+      - name: "userId"
+        type: "string"
+        description: "The UID of the user whose orders to fetch"
+    returns:
+      type: "Promise<Order[]>"
+      description: "Array of orders belonging to the user"
+    dependencies:
+      - "firestore.collection('orders')"
+    sideEffects: []
+
+  - name: "getOrderById"
+    file: "app/src/services/orderService.ts"
+    line: 75
+    description: "Fetches a single order by its document ID"
+    parameters:
+      - name: "orderId"
+        type: "string"
+        description: "The order document ID"
+    returns:
+      type: "Promise<Order | null>"
+      description: "The order if found, or null"
+    dependencies:
+      - "firestore.collection('orders')"
+    sideEffects: []
+
+  - name: "updateOrderStatus"
+    file: "app/src/services/orderService.ts"
+    line: 81
+    description: "Updates the status of an order (e.g. pending, confirmed, preparing, ready, completed, cancelled)"
+    parameters:
+      - name: "orderId"
+        type: "string"
+        description: "The order document ID to update"
+      - name: "status"
+        type: "OrderStatus"
+        description: "The new status value"
+    returns:
+      type: "Promise<void>"
+      description: "Resolves when the update is complete"
+    dependencies:
+      - "firestore.collection('orders')"
+    sideEffects:
+      - "Updates the 'status' and 'updatedAt' fields in Firestore collection 'orders'"
+
+  - name: "validatePromoCode"
+    file: "app/src/services/orderService.ts"
+    line: 88
+    description: "Validates a promo code against the Firestore promo_codes collection. Checks if the code exists, is active, hasn't expired, and meets minimum order requirements. Computes the discount amount"
+    parameters:
+      - name: "code"
+        type: "string"
+        description: "The promo code string to validate (normalized to uppercase)"
+      - name: "subtotal"
+        type: "number"
+        description: "The order subtotal to validate against minimum order and calculate discount"
+    returns:
+      type: "Promise<PromoValidation>"
+      description: "Object with valid (boolean), discount (number), and optional error message"
+    dependencies:
+      - "firestore.collection('promo_codes')"
+    sideEffects: []
+
+  - name: "CartProvider"
+    file: "app/src/store/CartContext.tsx"
+    line: 31
+    description: "React context provider that manages shopping cart state. Persists cart items to AsyncStorage. Provides functions to add, remove, update quantities, clear cart, and apply promo codes"
+    parameters:
+      - name: "children"
+        type: "ReactNode"
+        description: "Child components that will have access to cart context"
+    returns:
+      type: "JSX.Element"
+      description: "CartContext.Provider wrapping children"
+    dependencies:
+      - "AsyncStorage"
+      - "orderService.validatePromoCode"
+    sideEffects:
+      - "Reads cart from AsyncStorage on mount"
+      - "Writes cart to AsyncStorage on every change"
+
+  - name: "useCart"
+    file: "app/src/store/CartContext.tsx"
+    line: 135
+    description: "Custom hook to access the cart context. Must be used within a CartProvider"
+    parameters: []
+    returns:
+      type: "CartContextType"
+      description: "Object with items, itemCount, subtotal, addItem, removeItem, updateQuantity, clearCart, promoCode, promoDiscount, promoError, promoLoading, applyPromoCode"
+    dependencies:
+      - "CartContext"
+    sideEffects: []
+
+  - name: "calculateItemTotal"
+    file: "app/src/store/CartContext.tsx"
+    line: 25
+    description: "Calculates the total price for a cart item including base price, customization modifiers, and quantity"
+    parameters:
+      - name: "menuItem"
+        type: "MenuItem"
+        description: "The menu item with base price"
+      - name: "quantity"
+        type: "number"
+        description: "Number of items"
+      - name: "customizations"
+        type: "SelectedCustomization[]"
+        description: "Selected customization options with price modifiers"
+    returns:
+      type: "number"
+      description: "The total price for the item"
+    dependencies: []
+    sideEffects: []

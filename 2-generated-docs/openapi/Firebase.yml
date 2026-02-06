@@ -1,0 +1,45 @@
+openapi: "3.0.0"
+info:
+  title: "Firebase Cloud Functions API"
+  description: "Cloud Functions callable endpoints used by the Z Cafe app. Currently mock implementations."
+paths:
+  /submitAnonymous:
+    post:
+      summary: "Submit anonymous feedback"
+      description: "Submits anonymous user feedback through a Firebase Cloud Function callable. Strips all identifying information before storage."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              required:
+                - "message"
+                - "category"
+              properties:
+                message:
+                  type: "string"
+                  maxLength: 1000
+                  description: "The anonymous feedback message"
+                category:
+                  type: "string"
+                  enum:
+                    - "feedback"
+                    - "suggestion"
+                    - "compliment"
+                    - "concern"
+                    - "other"
+                  description: "The feedback category"
+      responses:
+        "200":
+          description: "Successfully submitted"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  data:
+                    type: "object"
+                    properties:
+                      success:
+                        type: "boolean"
+                        description: "Whether the submission was successful"
